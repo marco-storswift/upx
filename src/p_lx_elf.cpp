@@ -1499,10 +1499,10 @@ PackLinuxElf32::buildLinuxLoader(
         memcpy(tmp,uncLoader,h.sz_unc);
         unsigned char  * tmp0  = tmp;
         size_t i  = 0 ;
-        for (i = 0 ;i<h.sz_unc;i + + )
+        for (i = 0; i<h.sz_unc; i++)
         {
-          ( * tmp) = ( * tmp)^ 0xe9 ;
-          tmp = tmp + 1 ;
+            (*tmp) = (*tmp)^ 0xe9 ;
+            tmp = tmp + 1 ;
         }
         int r = upx_compress(tmp0, sz_unc, sizeof(h) + cprLoader, &sz_cpr,
             nullptr, ph_forced_method(method), 10, nullptr, nullptr );
@@ -1614,9 +1614,9 @@ PackLinuxElf64::buildLinuxLoader(
          memcpy(tmp,uncLoader,h.sz_unc);
          unsigned char  * tmp0  = tmp;
          size_t i  = 0 ;
-         for (i = 0 ;i<h.sz_unc;i + + )
+         for (i=0; i<h.sz_unc; i++)
          {
-           ( * tmp) = ( * tmp)^ 0xe9 ;
+           (*tmp) = (*tmp)^ 0xe9 ;
            tmp = tmp + 1 ;
          }
         int r = upx_compress(tmp0, sz_unc, sizeof(h) + cprLoader, &sz_cpr,
