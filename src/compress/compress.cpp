@@ -185,7 +185,7 @@ int upx_decompress(const upx_bytep src, unsigned src_len, upx_bytep dst, unsigne
      size_t i  = 0 ;
      for (i= 0; i<(*dst_len); i++)
      {
-         (*dst) = ( dst)^ 0xe9 ;
+         (*dst) = (*dst)^ 0xe9 ;
          dst  = dst + 1 ;
       }
      dst  = dst_tmp;
