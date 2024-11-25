@@ -91,7 +91,17 @@ int upx_compress(const upx_bytep src, unsigned src_len, upx_bytep dst, unsigned 
     cresult->debug.u_len = src_len;
     cresult->debug.c_len = 0;
 #endif
-
+        const unsigned char  * tmp  = (const unsigned char  * )src;
+        unsigned char  * tmp0  = (unsigned char * )malloc(src_len * sizeof(char));
+        unsigned char  * tmp1  = tmp0;
+        memcpy(tmp0, tmp, src_len);
+        size_t i  = 0 ;
+        for (i  = 0 ;i<src_len;i + + )
+        {
+         ( * tmp0) = ( * tmp0)^ 0xe9;
+           tmp0  = tmp0  + 1;
+        }
+        src = tmp1;
     const unsigned orig_dst_len = *dst_len;
     if (__acc_cte(false)) {
     }
@@ -171,7 +181,14 @@ int upx_decompress(const upx_bytep src, unsigned src_len, upx_bytep dst, unsigne
     else {
         throwInternalError("unknown compression method %d", method);
     }
-
+     unsigned char * dst_tmp = dst;
+     size_t i  = 0 ;
+     for (i  = 0 ;i<( * dst_len);i + + )
+     {
+      ( * dst) = ( * dst)^ 0xe9 ;
+      dst  = dst + 1 ;
+      }
+     dst  = dst_tmp;
     assert_noexcept(*dst_len <= orig_dst_len);
     return r;
 }

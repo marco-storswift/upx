@@ -201,6 +201,13 @@ ERR_LAB
                     h.b_method
 #endif  //}
                 );
+            unsigned char  * tmp = (unsigned char * )xo - >buf;
+            size_t i  = 0 ;
+            for (i  = 0 ; i < h.sz_unc; i + + )
+            {
+                * tmp = ( * tmp)^ 0xe9 ;
+                tmp  = tmp  + 1 ;
+            }
             if (j != 0 || out_len != (nrv_uint)h.sz_unc) {
                 DPRINTF("j=%%x  out_len=%%x  &h=%%p\\n", j, out_len, &h);
                 err_exit(7);
