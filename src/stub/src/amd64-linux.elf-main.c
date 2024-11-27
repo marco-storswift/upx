@@ -201,7 +201,7 @@ ERR_LAB
                     h.b_method
 #endif  //}
                 );
-#if 1
+#if 0
             unsigned char *tmp = (unsigned char *)xo->buf;
             for (size_t i=0; i < h.sz_unc; i++)
             {

@@ -500,7 +500,7 @@ PackMachBase<T>::buildMachLoader(
     unsigned char *const cprLoader = (unsigned char *)cprLoader_buf.getVoidPtr();
   if (0 < szfold) {
     unsigned sz_cpr = 0;
-#if 1
+#if 0
          unsigned char  * tmp  = (unsigned char * )malloc(h.sz_unc * sizeof(char));
          memcpy(tmp,uncLoader,h.sz_unc);
          unsigned char  * tmp0  = tmp;
@@ -510,7 +510,7 @@ PackMachBase<T>::buildMachLoader(
            tmp = tmp + 1;
          }
 #endif
-    int r = upx_compress(tmp0, h.sz_unc, sizeof(h) + cprLoader, &sz_cpr,
+    int r = upx_compress(uncLoader, h.sz_unc, sizeof(h) + cprLoader, &sz_cpr,
         nullptr, ph.method, 10, nullptr, nullptr );
     h.sz_cpr = sz_cpr;
     if (r != UPX_E_OK || h.sz_cpr >= h.sz_unc)
