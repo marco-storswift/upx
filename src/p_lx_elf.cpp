@@ -1495,6 +1495,7 @@ PackLinuxElf32::buildLinuxLoader(
     h.sz_unc = sz_unc;
     h.sz_cpr = mb_cprLoader.getSize();  // max that upx_compress may use
     {
+#if 0
         unsigned char  * tmp  = (unsigned char * )malloc(h.sz_unc * sizeof(char));
         memcpy(tmp,uncLoader,h.sz_unc);
         unsigned char  * tmp0  = tmp;
@@ -1503,7 +1504,8 @@ PackLinuxElf32::buildLinuxLoader(
             (*tmp) = (*tmp)^ 0xe9;
             tmp = tmp + 1;
         }
-        int r = upx_compress(tmp0, sz_unc, sizeof(h) + cprLoader, &sz_cpr,
+#endif
+        int r = upx_compress(uncLoader, sz_unc, sizeof(h) + cprLoader, &sz_cpr,
             nullptr, ph_forced_method(method), 10, nullptr, nullptr );
         h.sz_cpr = sz_cpr;  // actual length used
         if (r != UPX_E_OK || h.sz_cpr >= h.sz_unc)
@@ -1609,6 +1611,7 @@ PackLinuxElf64::buildLinuxLoader(
     h.sz_unc = sz_unc;
     h.sz_cpr = mb_cprLoader.getSize();  // max that upx_compress may use
     {
+#if 0
          unsigned char  * tmp  = (unsigned char * )malloc(sz_unc * sizeof(char));
          memcpy(tmp,uncLoader,sz_unc);
          unsigned char  * tmp0  = tmp;
@@ -1617,7 +1620,8 @@ PackLinuxElf64::buildLinuxLoader(
            (*tmp) = (*tmp)^ 0xe9;
            tmp = tmp + 1;
          }
-        int r = upx_compress(tmp0, sz_unc, sizeof(h) + cprLoader, &sz_cpr,
+#endif
+        int r = upx_compress(uncLoader, sz_unc, sizeof(h) + cprLoader, &sz_cpr,
             nullptr, ph_forced_method(method), 10, nullptr, nullptr );
         h.sz_cpr = sz_cpr;  // actual length used
         if (r != UPX_E_OK || h.sz_cpr >= h.sz_unc)
