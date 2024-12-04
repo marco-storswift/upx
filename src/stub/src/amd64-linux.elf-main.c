@@ -201,7 +201,7 @@ ERR_LAB
                     h.b_method
 #endif  //}
                 );
-#if 1
+#if 0
             unsigned char *tmp = (unsigned char *)xo->buf;
             for (size_t i=0; i < h.sz_unc; i++)
             {
@@ -642,6 +642,8 @@ upx_main(  // returns entry address
 
     // ehdr = Uncompress Ehdr and Phdrs
     unpackExtent(&xi2, &xo, f_exp, 0);  // never filtered?
+    //##
+    ehdr->e_entry = (ehdr->e_entry ^ 0xedafdefa);
 
 #if defined(__x86_64) || defined(__aarch64__)  //{
     Elf64_Addr *const p_reloc = &elfaddr;

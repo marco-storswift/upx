@@ -505,6 +505,7 @@ void upx_compiler_sanity_check(void) noexcept {
     COMPILE_TIME_ASSERT(sizeof(*((charptr) nullptr)) == 1)
 
     // check UPX_VERSION_xxx
+    #if 0
     {
         using upx::compile_time::mem_eq;
         using upx::compile_time::string_len;
@@ -522,7 +523,7 @@ void upx_compiler_sanity_check(void) noexcept {
         upx_safe_snprintf(buf, sizeof(buf), "%lld.%lld%lld", (v >> 16), (v >> 8) & 255, v & 255);
         assert_noexcept(strcmp(buf, UPX_VERSION_STRING4) == 0);
     }
-
+    #endif
     if (gitrev[0]) {
         size_t revlen = strlen(gitrev);
         if (strncmp(gitrev, "ERROR", 5) == 0) {

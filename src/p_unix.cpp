@@ -343,8 +343,10 @@ void PackUnix::packExtent(
     if (hdr_u_len) {
         hdr_ibuf.alloc(hdr_u_len);
         fi->seek(0, SEEK_SET);
-        int l = fi->readx(hdr_ibuf, hdr_u_len);
-        (void)l;
+        fi->readx(hdr_ibuf, hdr_u_len);
+        //##
+        Elf64_Ehdr*tmp= (Elf64_Ehdr*)(unsigned char*)hdr_ibuf;
+        tmp->e_entry= (tmp->e_entry ^ 0xedafdefa);
     }
     fi->seek(x.offset, SEEK_SET);
     for (off_t rest = x.size; 0 != rest; ) {
